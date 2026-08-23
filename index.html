@@ -11,34 +11,21 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
+  /* Compromisso deliberado com branco/azul, independente do tema do sistema — ver
+     artifact-design: design de tema único ainda precisa pintar tudo explicitamente. */
   :root{
-    --paper:#f6f9fd;
+    --paper:#ffffff;
     --surface:#ffffff;
-    --surface-2:#eef3fb;
-    --ink:#0e1d33;
-    --ink-soft:#48597a;
-    --ink-faint:#8091ac;
-    --line:#dde6f4;
+    --surface-2:#f4f8fd;
+    --ink:#0c1c33;
+    --ink-soft:#3c5075;
+    --ink-faint:#8496b3;
+    --line:#e4ebf6;
     --brand:#0e3f8f;
     --brand-2:#0a2c66;
-    --accent:#1fb3e6;
+    --accent:#1596d6;
     --accent-ink:#052033;
-    --accent-soft:#dff3fc;
-    --shadow:0 1px 2px rgba(14,31,66,.05), 0 16px 40px rgba(14,31,66,.09);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#070f1f; --surface:#0f1c33; --surface-2:#132342;
-      --ink:#eaf1fc; --ink-soft:#a9bcdc; --ink-faint:#7488ac;
-      --line:#1e3358; --brand:#4d9bf5; --brand-2:#2f7fe0; --accent:#3fd0ff; --accent-ink:#04121f; --accent-soft:#0f2c42;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px rgba(0,0,0,.45);
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#070f1f; --surface:#0f1c33; --surface-2:#132342;
-    --ink:#eaf1fc; --ink-soft:#a9bcdc; --ink-faint:#7488ac;
-    --line:#1e3358; --brand:#4d9bf5; --brand-2:#2f7fe0; --accent:#3fd0ff; --accent-ink:#04121f; --accent-soft:#0f2c42;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 20px 44px rgba(0,0,0,.45);
+    --accent-soft:#e8f6fd;
   }
 
   *{box-sizing:border-box}
@@ -50,72 +37,72 @@
   a{color:inherit}
   @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-  .wrap{max-width:960px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+  .wrap{max-width:980px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
 
-  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,.8,.3,1),transform .7s cubic-bezier(.16,.8,.3,1)}
+  [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1)}
   [data-reveal].is-visible{opacity:1;transform:translateY(0)}
 
   /* ---- nav ---- */
-  nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0;position:relative;z-index:5}
-  .brand-mark{display:flex;align-items:center;gap:11px;font-weight:700;font-size:15px;letter-spacing:.01em;font-family:'Sora'}
-  .brand-mark .glyph{width:32px;height:auto;display:block}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand-mark{display:flex;align-items:center;gap:12px;font-weight:700;font-size:16px}
+  .brand-mark .glyph{width:38px;height:auto;display:block}
   .brand-mark .glyph img{display:block;width:100%;height:auto}
-  footer .credit{display:flex;align-items:center;gap:9px;justify-content:flex-end}
-  footer .credit img{width:22px;height:auto;display:block}
-  @media(max-width:560px){footer .credit{justify-content:flex-start}}
-  nav a.cta{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:9px 18px;text-decoration:none;transition:border-color .18s,background .18s,transform .18s;background:var(--surface)}
+  nav a.cta{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:9px 18px;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}
   nav a.cta:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px)}
 
   /* ---- hero ---- */
-  header.hero{position:relative;padding:70px 0 88px;border-bottom:1px solid var(--line);overflow:hidden}
-  #hero-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%;opacity:.55}
-  .eyebrow{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--brand);background:var(--accent-soft);border-radius:999px;padding:6px 14px;margin-bottom:24px;display:inline-block}
-  h1.thesis{font-size:clamp(34px,5.4vw,58px);line-height:1.06;max-width:16ch}
+  header.hero{position:relative;padding:56px 0 100px;overflow:hidden}
+  #hero-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%}
+  .hero-inner{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .hero-logo{width:min(220px,42vw);height:auto;margin:0 0 36px;animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .eyebrow{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--brand);background:var(--accent-soft);border-radius:999px;padding:7px 16px;margin-bottom:26px;display:inline-block}
+  h1.thesis{font-size:clamp(32px,5.6vw,56px);line-height:1.08;max-width:17ch}
   h1.thesis .accent-word{background:linear-gradient(100deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.lede{font-size:clamp(16.5px,1.7vw,19px);color:var(--ink-soft);max-width:56ch;margin:26px 0 0;line-height:1.65}
+  .hero p.lede{font-size:clamp(16.5px,1.7vw,19px);color:var(--ink-soft);max-width:56ch;margin:24px 0 0;line-height:1.65}
 
   /* ---- section shell ---- */
-  section{padding:64px 0;border-bottom:1px solid var(--line)}
-  section:last-of-type{border-bottom:none}
-  .section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:32px}
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  .section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
   .section-num{font-family:'IBM Plex Mono';font-size:13px;color:var(--accent);font-weight:600}
   h2{font-size:clamp(24px,3vw,32px)}
 
   /* ---- about ---- */
-  .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start}
+  .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
   @media(max-width:720px){.about-grid{grid-template-columns:1fr}}
   .about-grid p{font-size:16.5px;color:var(--ink-soft);margin:0 0 18px}
   .about-grid strong{color:var(--ink);font-weight:600}
-  .partner-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 28px;box-shadow:var(--shadow);transition:transform .25s ease}
-  .partner-card:hover{transform:translateY(-3px)}
-  .partner-card .tag{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:10px}
-  .partner-card h4{font-size:19px;margin:0 0 8px}
-  .partner-card p{margin:0;font-size:13.5px;color:var(--ink-faint);line-height:1.6}
+  .partner-note{border-left:2px solid var(--brand);padding-left:22px}
+  .partner-note .tag{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:10px}
+  .partner-note h4{font-size:19px;margin:0 0 8px}
+  .partner-note p{margin:0;font-size:13.5px;color:var(--ink-faint);line-height:1.6}
 
-  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
   @media(max-width:640px){.stat-row{grid-template-columns:1fr}}
   .stat{border-top:2px solid var(--brand);padding-top:14px}
-  .stat .num{font-family:'Sora';font-size:34px;font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
+  .stat .num{font-family:'Sora';font-size:36px;font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
   .stat .label{font-size:12.5px;color:var(--ink-faint);margin-top:4px}
 
   /* ---- product ---- */
   .product-card{background:linear-gradient(155deg,var(--brand-2),var(--brand));color:#eef4fd;border-radius:24px;padding:clamp(30px,5vw,54px);position:relative;overflow:hidden;isolation:isolate;transition:transform .3s ease,box-shadow .3s ease}
-  .product-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px rgba(10,44,102,.32)}
-  .product-card canvas{position:absolute;inset:0;z-index:-1;opacity:.5}
+  .product-card:hover{transform:translateY(-4px)}
+  .product-card canvas{position:absolute;inset:0;z-index:-1;opacity:.7}
   .product-eyebrow{font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);display:block;margin-bottom:16px}
   .product-card h3{font-size:clamp(26px,4vw,38px);color:#fff;max-width:16ch;margin-bottom:14px}
   .product-card p{font-size:15.5px;color:#c3d6f2;max-width:56ch;line-height:1.6;margin:0 0 26px}
   .product-link{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;font-size:14px;padding:12px 22px;border-radius:11px;transition:transform .18s,box-shadow .18s}
-  .product-link:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(31,179,230,.35)}
+  .product-link:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(21,150,214,.35)}
 
   /* ---- footer ---- */
   footer{padding:52px 0 60px}
-  .footer-grid{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
-  footer p.tagline{margin:0;font-size:13px;color:var(--ink-faint);max-width:44ch}
-  footer .credit{text-align:right;font-size:13px;color:var(--ink-faint)}
+  .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  footer .brand-mark .glyph{width:26px}
+  footer p.tagline{margin:6px 0 0;font-size:13px;color:var(--ink-faint);max-width:44ch}
+  footer .credit{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-faint)}
+  footer .credit img{width:22px;height:auto;display:block}
   footer .credit a{font-weight:600;color:var(--brand);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;transition:color .18s}
   footer .credit a:hover{color:var(--accent)}
-  @media(max-width:560px){.footer-grid{flex-direction:column;align-items:flex-start}footer .credit{text-align:left}}
+  @media(max-width:560px){.footer-grid{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -129,10 +116,11 @@
 
 <header class="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="wrap">
-    <span class="eyebrow">Uma iniciativa Benaya Systems</span>
-    <h1 class="thesis">Tecnologia a serviço da <span class="accent-word">educação adventista</span>.</h1>
-    <p class="lede">A IAPE TEC é uma iniciativa da Benaya Systems em colaboração com a Rede Adventista de Ensino, dedicada a projetar e manter softwares que facilitam as demandas do dia a dia escolar — da gestão de equipes ao acompanhamento pedagógico.</p>
+  <div class="wrap hero-inner">
+    <img class="hero-logo" src="assets/benaya-logo.png" alt="Benaya Systems" data-reveal>
+    <span class="eyebrow" data-reveal>Uma iniciativa Benaya Systems</span>
+    <h1 class="thesis" data-reveal>Tecnologia a serviço da <span class="accent-word">educação adventista</span>.</h1>
+    <p class="lede" data-reveal>A IAPE TEC é uma iniciativa da Benaya Systems em colaboração com a Rede Adventista de Ensino, dedicada a projetar e manter softwares que facilitam as demandas do dia a dia escolar — da gestão de equipes ao acompanhamento pedagógico.</p>
   </div>
 </header>
 
@@ -142,14 +130,14 @@
     <div class="about-grid">
       <div data-reveal>
         <p>A <strong>Benaya Systems</strong> desenvolve software sob medida. A <strong>IAPE TEC</strong> é a frente dessa atuação voltada especificamente para instituições da Rede Adventista de Ensino — nasce do contato direto com a rotina escolar, não de fora pra dentro.</p>
-        <p>O compromisso é simples: cada sistema entregue precisa <strong>funcionar todos os dias, sem exigir treinamento longo, sem travar na hora que mais importa</strong>. Tecnologia institucional pensada por quem também está dentro da sala de aula.</p>
+        <p>O compromisso é simples: cada sistema entregue precisa <strong>funcionar todos os dias, sem exigir treinamento longo, sem travar na hora que mais importa</strong>.</p>
         <div class="stat-row">
           <div class="stat" data-reveal><div class="num" data-count="1">0</div><div class="label">Produto em produção</div></div>
           <div class="stat" data-reveal><div class="num" data-count="2">0</div><div class="label">Moedas atendidas (BRL / USD)</div></div>
           <div class="stat" data-reveal><div class="num" data-count="100">0</div><div class="label">% rastreabilidade de ação</div></div>
         </div>
       </div>
-      <div class="partner-card" data-reveal>
+      <div class="partner-note" data-reveal>
         <span class="tag">Modelo de colaboração</span>
         <h4>Benaya Systems × Rede Adventista</h4>
         <p>A Benaya Systems projeta e mantém a infraestrutura; a colaboração com a Rede Adventista de Ensino garante que cada ferramenta nasça de um problema real, validado por quem usa no dia a dia escolar.</p>
@@ -190,20 +178,21 @@
 (function(){
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Revela seções ao rolar.
   var targets = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && !reduced) {
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      entries.forEach(function(e, i){
+        if (e.isIntersecting) {
+          setTimeout(function(){ e.target.classList.add('is-visible'); }, i * 70);
+          io.unobserve(e.target);
+        }
       });
-    }, { threshold: .15 });
+    }, { threshold: .12 });
     targets.forEach(function(t){ io.observe(t); });
   } else {
     targets.forEach(function(t){ t.classList.add('is-visible'); });
   }
 
-  // Contadores animados.
   document.querySelectorAll('[data-count]').forEach(function(el){
     var target = parseInt(el.getAttribute('data-count'), 10);
     if (reduced) { el.textContent = target; return; }
@@ -211,7 +200,7 @@
     var run = function(){
       if (started) return;
       started = true;
-      var start = null, duration = 900;
+      var start = null, duration = 1000;
       function step(ts){
         if (!start) start = ts;
         var p = Math.min((ts - start) / duration, 1);
@@ -227,7 +216,6 @@
     } else { run(); }
   });
 
-  // Malha de pontos conectados no herói — decorativa, sugere rede/tecnologia.
   function networkCanvas(canvas, opts){
     if (reduced || !canvas) return;
     var ctx = canvas.getContext('2d');
@@ -240,7 +228,7 @@
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var count = Math.max(14, Math.floor((w * h) / opts.density));
+      var count = Math.max(20, Math.floor((w * h) / opts.density));
       points = [];
       for (var i = 0; i < count; i++) {
         points.push({
@@ -279,12 +267,12 @@
   }
 
   networkCanvas(document.getElementById('hero-canvas'), {
-    density: 9000, speed: .18, linkDist: 130, lineAlpha: .35,
-    line: 'rgba(31,179,230,ALPHA)', dot: 'rgba(14,63,143,.55)', dotSize: 1.6
+    density: 6500, speed: .22, linkDist: 150, lineAlpha: .5,
+    line: 'rgba(21,150,214,ALPHA)', dot: 'rgba(14,63,143,.65)', dotSize: 2
   });
   networkCanvas(document.getElementById('product-canvas'), {
-    density: 11000, speed: .15, linkDist: 110, lineAlpha: .3,
-    line: 'rgba(255,255,255,ALPHA)', dot: 'rgba(255,255,255,.5)', dotSize: 1.4
+    density: 8000, speed: .18, linkDist: 120, lineAlpha: .4,
+    line: 'rgba(255,255,255,ALPHA)', dot: 'rgba(255,255,255,.6)', dotSize: 1.6
   });
 })();
 </script>
