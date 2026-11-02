@@ -1,283 +1,69 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IAPE TEC</title>
-<meta name="description" content="IAPE TEC é uma iniciativa Benaya Systems em colaboração com a Rede Adventista de Ensino, dedicada à criação de softwares que facilitam as demandas escolares.">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-  /* Compromisso deliberado com branco/azul, independente do tema do sistema — ver
-     artifact-design: design de tema único ainda precisa pintar tudo explicitamente. */
-  :root{
-    --paper:#ffffff;
-    --surface:#ffffff;
-    --surface-2:#f4f8fd;
-    --ink:#0c1c33;
-    --ink-soft:#3c5075;
-    --ink-faint:#8496b3;
-    --line:#e4ebf6;
-    --brand:#0e3f8f;
-    --brand-2:#0a2c66;
-    --accent:#1596d6;
-    --accent-ink:#052033;
-    --accent-soft:#e8f6fd;
-  }
-
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  ::selection{background:var(--accent-soft);color:var(--accent-ink)}
-  h1,h2,h3{font-family:'Sora',system-ui,sans-serif;font-weight:700;letter-spacing:-.02em;text-wrap:balance;margin:0}
-  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
-  a{color:inherit}
-  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-
-  .wrap{max-width:980px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
-
-  [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1)}
-  [data-reveal].is-visible{opacity:1;transform:translateY(0)}
-
-  /* ---- nav ---- */
-  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
-  .brand-mark{display:flex;align-items:center;gap:12px;font-weight:700;font-size:16px}
-  .brand-mark .glyph{width:38px;height:auto;display:block}
-  .brand-mark .glyph img{display:block;width:100%;height:auto}
-  nav a.cta{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:9px 18px;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}
-  nav a.cta:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px)}
-
-  /* ---- hero ---- */
-  header.hero{position:relative;padding:56px 0 100px;overflow:hidden}
-  #hero-canvas{position:absolute;inset:0;z-index:0;width:100%;height:100%}
-  .hero-inner{text-align:center;display:flex;flex-direction:column;align-items:center}
-  .hero-logo{width:min(220px,42vw);height:auto;margin:0 0 36px;animation:float 7s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .eyebrow{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--brand);background:var(--accent-soft);border-radius:999px;padding:7px 16px;margin-bottom:26px;display:inline-block}
-  h1.thesis{font-size:clamp(32px,5.6vw,56px);line-height:1.08;max-width:17ch}
-  h1.thesis .accent-word{background:linear-gradient(100deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.lede{font-size:clamp(16.5px,1.7vw,19px);color:var(--ink-soft);max-width:56ch;margin:24px 0 0;line-height:1.65}
-
-  /* ---- section shell ---- */
-  section{padding:60px 0;border-top:1px solid var(--line)}
-  .section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
-  .section-num{font-family:'IBM Plex Mono';font-size:13px;color:var(--accent);font-weight:600}
-  h2{font-size:clamp(24px,3vw,32px)}
-
-  /* ---- about ---- */
-  .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
-  @media(max-width:720px){.about-grid{grid-template-columns:1fr}}
-  .about-grid p{font-size:16.5px;color:var(--ink-soft);margin:0 0 18px}
-  .about-grid strong{color:var(--ink);font-weight:600}
-  .inline-link{color:var(--brand);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;transition:color .18s}
-  .inline-link:hover{color:var(--accent)}
-  .partner-note{border-left:2px solid var(--brand);padding-left:22px}
-  .partner-note .tag{font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:10px}
-  .partner-note h4{font-size:19px;margin:0 0 8px}
-  .partner-note p{margin:0;font-size:13.5px;color:var(--ink-faint);line-height:1.6}
-
-  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
-  @media(max-width:640px){.stat-row{grid-template-columns:1fr}}
-  .stat{border-top:2px solid var(--brand);padding-top:14px}
-  .stat .num{font-family:'Sora';font-size:36px;font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
-  .stat .label{font-size:12.5px;color:var(--ink-faint);margin-top:4px}
-
-  /* ---- product ---- */
-  .product-card{background:linear-gradient(155deg,var(--brand-2),var(--brand));color:#eef4fd;border-radius:24px;padding:clamp(30px,5vw,54px);position:relative;overflow:hidden;isolation:isolate;transition:transform .3s ease,box-shadow .3s ease}
-  .product-card:hover{transform:translateY(-4px)}
-  .product-card canvas{position:absolute;inset:0;z-index:-1;opacity:.7}
-  .product-eyebrow{font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);display:block;margin-bottom:16px}
-  .product-card h3{font-size:clamp(26px,4vw,38px);color:#fff;max-width:16ch;margin-bottom:14px}
-  .product-card p{font-size:15.5px;color:#c3d6f2;max-width:56ch;line-height:1.6;margin:0 0 26px}
-  .product-link{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;font-size:14px;padding:12px 22px;border-radius:11px;transition:transform .18s,box-shadow .18s}
-  .product-link:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(21,150,214,.35)}
-
-  /* ---- footer ---- */
-  footer{padding:52px 0 60px}
-  .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-  footer .brand-mark .glyph{width:26px}
-  footer p.tagline{margin:6px 0 0;font-size:13px;color:var(--ink-faint);max-width:44ch}
-  footer .credit{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-faint)}
-  footer .credit img{width:22px;height:auto;display:block}
-  footer .credit a{font-weight:600;color:var(--brand);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;transition:color .18s}
-  footer .credit a:hover{color:var(--accent)}
-  @media(max-width:560px){.footer-grid{flex-direction:column;align-items:flex-start}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <title>Code Staff — CS_0 · IAPE</title>
+  <meta name="description" content="Code Staff: uma nova geração de alunos construindo com tecnologia. Conheça a CS_0, a primeira equipe, e explore os projetos do ecossistema IAPE.">
+  <meta property="og:title" content="Code Staff — O próximo commit é nosso.">
+  <meta property="og:description" content="Uma equipe. Um semestre. Infinitas possibilidades. Conheça a primeira geração da Code Staff: CS_0.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iape.tech/">
+  <meta property="og:image" content="https://iape.tech/assets/cs0-portraits.webp">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/grotesk-700.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.menu-toggle,.effect-picker,.lab-status,.motion-toggle{display:none!important}.ticker>div{animation:none!important}@media(max-width:760px){#mobile-nav[hidden]{display:flex!important;flex-wrap:wrap;gap:0 20px;padding:10px 20px}#mobile-nav a{font-size:12px}}</style></noscript>
+  <script type="module" src="main.js"></script>
 </head>
 <body>
-
-<div class="wrap">
-  <nav>
-    <div class="brand-mark"><span class="glyph"><img src="assets/benaya-icon.png" alt=""></span>IAPE TEC</div>
-    <a class="cta" href="https://mytask.iape.tech" target="_blank" rel="noopener noreferrer">Ver o MyTask ↗</a>
-  </nav>
-</div>
-
-<header class="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="wrap hero-inner">
-    <img class="hero-logo" src="assets/benaya-logo.png" alt="Benaya Systems" data-reveal>
-    <span class="eyebrow" data-reveal>Uma iniciativa Benaya Systems</span>
-    <h1 class="thesis" data-reveal>Tecnologia a serviço da <span class="accent-word">educação adventista</span>.</h1>
-    <p class="lede" data-reveal>A IAPE TEC é uma iniciativa da Benaya Systems em colaboração com a Rede Adventista de Ensino, dedicada a projetar e manter softwares que facilitam as demandas do dia a dia escolar — da gestão de equipes ao acompanhamento pedagógico.</p>
-  </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="section-head"><span class="section-num">01</span><h2>Quem somos</h2></div>
-    <div class="about-grid">
-      <div data-reveal>
-        <p>A <strong><a class="inline-link" href="https://benayasystems.com" target="_blank" rel="noopener noreferrer">Benaya Systems</a></strong> desenvolve software sob medida. A <strong>IAPE TEC</strong> é a frente dessa atuação voltada especificamente para instituições da Rede Adventista de Ensino — nasce do contato direto com a rotina escolar, não de fora pra dentro.</p>
-        <p>O compromisso é simples: cada sistema entregue precisa <strong>funcionar todos os dias, sem exigir treinamento longo, sem travar na hora que mais importa</strong>.</p>
-        <div class="stat-row">
-          <div class="stat" data-reveal><div class="num" data-count="1">0</div><div class="label">Produto em produção</div></div>
-          <div class="stat" data-reveal><div class="num" data-count="2">0</div><div class="label">Moedas atendidas (BRL / USD)</div></div>
-          <div class="stat" data-reveal><div class="num" data-count="100">0</div><div class="label">% rastreabilidade de ação</div></div>
-        </div>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#inicio" aria-label="Code Staff — início"><span class="brand-symbol" aria-hidden="true">[<span>_</span>]</span><span>code staff<span class="brand-sub">IAPE.TECH</span></span></a>
+    <nav class="desktop-nav" aria-label="Menu principal"><a href="#projetos">Projetos</a><a href="#equipe">A equipe</a><a href="#manifesto">Manifesto</a><a href="#geracoes">Gerações <span aria-hidden="true">↗</span></a></nav>
+    <div class="header-end"><span class="cohort-pill"><span class="status-dot"></span> CS_0 <span class="pill-label">/ PRIMEIRA GERAÇÃO</span></span><button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu"><span></span><span></span></button></div>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Menu para celular" hidden><a href="#projetos">Projetos ↗</a><a href="#equipe">A equipe ↗</a><a href="#manifesto">Manifesto ↗</a><a href="#geracoes">Gerações ↗</a></nav>
+  <main id="conteudo">
+    <section class="hero wrap" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy"><div class="eyebrow"><span class="cross" aria-hidden="true">✳</span> ALUNOS NO PRESENTE. CRIADORES DO FUTURO.</div><h1 id="hero-title">O próximo<br>commit<br>é <span class="highlight">nosso<span class="underscore" aria-hidden="true">_</span></span></h1><p class="hero-lede">Uma equipe. Um semestre.<br>Infinitas possibilidades de fazer acontecer.</p><p class="hero-note">Somos a <strong>Code Staff</strong>, o coletivo de alunos do IAPE que transforma curiosidade em código. E essa é só a nossa primeira versão.</p><div class="hero-actions"><a class="button button-dark" href="#projetos">Explore os projetos <span aria-hidden="true">↗</span></a><a class="text-link" href="#equipe">Conheça a CS_0 <span aria-hidden="true">↓</span></a></div></div>
+      <div class="hero-visual" aria-label="Colagem com retratos ilustrativos da primeira geração">
+        <div class="visual-coordinate mono">FIG. 001 — GENTE QUE FAZ</div><div class="visual-grid" aria-hidden="true"></div>
+        <div class="orbit-mark mono" aria-hidden="true">+<br><span>0,0</span></div>
+        <div class="hero-photo photo-one" data-portrait="0" data-effect="teleport"><canvas aria-hidden="true"></canvas><span class="photo-index mono">000</span></div>
+        <div class="hero-photo photo-two" data-portrait="1" data-effect="dust"><canvas aria-hidden="true"></canvas><span class="photo-index mono">001</span></div>
+        <div class="hero-photo photo-three" data-portrait="2" data-effect="glitch"><canvas aria-hidden="true"></canvas><span class="photo-index mono">010</span></div>
+        <div class="generation-stamp"><span class="mono">HELLO, WORLD.</span><strong>CS_0<span class="stamp-cursor" aria-hidden="true"></span></strong><span class="mono">A PRIMEIRA DE MUITAS.</span></div>
+        <span class="visual-star" aria-hidden="true">✳</span><span class="small-sticker mono">feito de gente<br>+ boas ideias</span>
+        <div class="visual-footer mono"><span><span class="status-dot"></span> PRIMEIRA GERAÇÃO</span><span>100% CURIOSIDADE</span></div>
       </div>
-      <div class="partner-note" data-reveal>
-        <span class="tag">Modelo de colaboração</span>
-        <h4>Benaya Systems × Rede Adventista</h4>
-        <p>A Benaya Systems projeta e mantém a infraestrutura; a colaboração com a Rede Adventista de Ensino garante que cada ferramenta nasça de um problema real, validado por quem usa no dia a dia escolar.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="produto">
-  <div class="wrap">
-    <div class="section-head"><span class="section-num">02</span><h2>O que construímos</h2></div>
-    <div class="product-card" data-reveal>
-      <canvas id="product-canvas"></canvas>
-      <span class="product-eyebrow">Produto em produção</span>
-      <h3>MyTask — gestão que chega ao fim.</h3>
-      <p>Quadros, prazos e responsáveis num só lugar, com visibilidade real pra liderança e foco pra cada equipe. Já em uso por instituições de verdade, com planos pro Brasil e pro mercado internacional.</p>
-      <a class="product-link" href="https://mytask.iape.tech" target="_blank" rel="noopener noreferrer">Conhecer o MyTask →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <div class="brand-mark"><span class="glyph"><img src="assets/benaya-icon.png" alt=""></span>IAPE TEC</div>
-        <p class="tagline">Uma iniciativa Benaya Systems em colaboração com a Rede Adventista de Ensino.</p>
-      </div>
-      <div class="credit">
-        <img src="assets/benaya-icon.png" alt="">
-        Created by <a href="https://benayasystems.com" target="_blank" rel="noopener noreferrer">Benaya Systems ↗</a> · <a href="https://instagram.com/brunopatriots" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var targets = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && !reduced) {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e, i){
-        if (e.isIntersecting) {
-          setTimeout(function(){ e.target.classList.add('is-visible'); }, i * 70);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: .12 });
-    targets.forEach(function(t){ io.observe(t); });
-  } else {
-    targets.forEach(function(t){ t.classList.add('is-visible'); });
-  }
-
-  document.querySelectorAll('[data-count]').forEach(function(el){
-    var target = parseInt(el.getAttribute('data-count'), 10);
-    if (reduced) { el.textContent = target; return; }
-    var started = false;
-    var run = function(){
-      if (started) return;
-      started = true;
-      var start = null, duration = 1000;
-      function step(ts){
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / duration, 1);
-        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    };
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(entries, obs){
-        entries.forEach(function(e){ if (e.isIntersecting) { run(); obs.disconnect(); } });
-      }, { threshold: .5 }).observe(el);
-    } else { run(); }
-  });
-
-  function networkCanvas(canvas, opts){
-    if (reduced || !canvas) return;
-    var ctx = canvas.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w, h, points;
-
-    function resize(){
-      w = canvas.parentElement.clientWidth;
-      h = canvas.parentElement.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var count = Math.max(20, Math.floor((w * h) / opts.density));
-      points = [];
-      for (var i = 0; i < count; i++) {
-        points.push({
-          x: Math.random() * w, y: Math.random() * h,
-          vx: (Math.random() - .5) * opts.speed, vy: (Math.random() - .5) * opts.speed
-        });
-      }
-    }
-    function tick(){
-      ctx.clearRect(0, 0, w, h);
-      points.forEach(function(p){
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-      });
-      for (var i = 0; i < points.length; i++) {
-        for (var j = i + 1; j < points.length; j++) {
-          var dx = points[i].x - points[j].x, dy = points[i].y - points[j].y;
-          var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < opts.linkDist) {
-            ctx.strokeStyle = opts.line.replace('ALPHA', (1 - dist / opts.linkDist) * opts.lineAlpha);
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(points[i].x, points[i].y); ctx.lineTo(points[j].x, points[j].y); ctx.stroke();
-          }
-        }
-      }
-      points.forEach(function(p){
-        ctx.fillStyle = opts.dot;
-        ctx.beginPath(); ctx.arc(p.x, p.y, opts.dotSize, 0, Math.PI * 2); ctx.fill();
-      });
-      requestAnimationFrame(tick);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    requestAnimationFrame(tick);
-  }
-
-  networkCanvas(document.getElementById('hero-canvas'), {
-    density: 6500, speed: .22, linkDist: 150, lineAlpha: .5,
-    line: 'rgba(21,150,214,ALPHA)', dot: 'rgba(14,63,143,.65)', dotSize: 2
-  });
-  networkCanvas(document.getElementById('product-canvas'), {
-    density: 8000, speed: .18, linkDist: 120, lineAlpha: .4,
-    line: 'rgba(255,255,255,ALPHA)', dot: 'rgba(255,255,255,.6)', dotSize: 1.6
-  });
-})();
-</script>
-
+      <div class="hero-bottom mono"><span>APRENDER. EXPERIMENTAR. CONSTRUIR.</span><a href="#laboratorio">ROLE PARA EXPLORAR <span aria-hidden="true">↓</span></a></div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div><span>CODE STAFF</span><i>✳</i><span>APRENDER FAZENDO</span><i>↗</i><span>CS_0</span><i>✳</i><span>IDEIAS EM MOVIMENTO</span><i>↗</i><span>CODE STAFF</span><i>✳</i><span>APRENDER FAZENDO</span><i>↗</i><span>CS_0</span><i>✳</i><span>IDEIAS EM MOVIMENTO</span><i>↗</i></div></div>
+    <section id="laboratorio" class="lab wrap section-space" aria-labelledby="lab-title">
+      <div class="section-label mono"><span>00 / EXPERIMENTE</span><span>O CÓDIGO TAMBÉM PODE SER SENTIDO.</span></div>
+      <div class="lab-layout"><div class="lab-heading"><h2 id="lab-title">Um pouco<br>fora da<br><span class="outline-text">realidade.</span></h2><p>Às vezes, uma boa ideia precisa sair da dimensão de sempre. Toque em um efeito e veja o que acontece.</p><div class="effect-picker" role="group" aria-label="Escolher efeito visual"><button class="effect-option active" data-demo-effect="teleport" aria-pressed="true"><span class="effect-dot yellow"></span><span>01 / Materializar</span><span aria-hidden="true">↗</span></button><button class="effect-option" data-demo-effect="dust" aria-pressed="false"><span class="effect-dot green"></span><span>02 / Desintegrar</span><span aria-hidden="true">↗</span></button><button class="effect-option" data-demo-effect="glitch" aria-pressed="false"><span class="effect-dot purple"></span><span>03 / Outra dimensão</span><span aria-hidden="true">↗</span></button></div><p class="lab-status mono" id="effect-status" role="status">01 / RECONSTRUINDO, LINHA POR LINHA.</p></div><div class="lab-stage"><div class="stage-corner corner-tl" aria-hidden="true"></div><div class="stage-corner corner-tr" aria-hidden="true"></div><div class="stage-corner corner-bl" aria-hidden="true"></div><div class="stage-corner corner-br" aria-hidden="true"></div><span class="stage-meta mono">CS_0 / TRANSMISSÃO 001</span><div class="demo-portrait" data-portrait="3" data-effect="teleport"><canvas aria-hidden="true"></canvas></div><span class="stage-reticle" aria-hidden="true">+</span><span class="stage-bottom mono">IDENTIDADE EM CONSTRUÇÃO<span>● AO VIVO</span></span></div></div>
+    </section>
+    <section id="projetos" class="projects section-space" aria-labelledby="projects-title"><div class="wrap"><div class="section-label mono"><span>01 / PROJETOS</span><span>DA IDEIA PARA A VIDA REAL.</span></div><div class="section-intro"><h2 id="projects-title">Código que<br>encontra propósito<span class="purple-text">.</span></h2><p>Conheça ferramentas do ecossistema IAPE.<br>Problemas reais, soluções para explorar<br>e um mundo de coisas para aprender.</p></div>
+      <div class="project-list">
+        <details class="project" open><summary><span class="project-number mono">001</span><div class="project-title"><h3>MyTask</h3><span class="mono">ORGANIZAÇÃO & COLABORAÇÃO</span></div><span class="project-tag yellow">Gestão de equipes</span><span class="project-toggle" aria-hidden="true">+</span></summary><div class="project-content"><div class="project-preview task-preview" aria-hidden="true"><div class="mock-title mono"><span>mytask / workspace</span><span>•••</span></div><div class="kanban"><div><span class="mono">A FAZER <b>02</b></span><div class="task"><i class="green"></i>Uma nova ideia<small>O começo de tudo.</small><em>↗</em></div><div class="task"><i class="purple"></i>Pensar em equipe<small>Conectar os pontos.</small></div></div><div><span class="mono">EM MOVIMENTO <b>01</b></span><div class="task"><i class="yellow"></i>Tirar do papel<small>Um commit de cada vez.</small><div class="avatars"><b>A</b><b>B</b><b>C</b></div></div></div><div><span class="mono">FEITO <b>01</b></span><div class="task task-done"><span>✓</span>Hello, world!<small>Primeira versão no ar.</small></div></div></div><span class="mock-caption mono">VISUALIZAÇÃO ILUSTRATIVA</span></div><div class="project-description"><span class="mono small-label">MENOS RUÍDO. MAIS REALIZAÇÃO.</span><p>Quadros, prazos e responsáveis no mesmo lugar. O MyTask ajuda equipes a organizar o trabalho e acompanhar cada entrega, do primeiro passo até a conclusão.</p><div class="tech-tags mono"><span>COLABORAÇÃO</span><span>PRODUTIVIDADE</span></div><a class="text-link" href="https://mytask.iape.tech" target="_blank" rel="noopener noreferrer">Conhecer o MyTask <span aria-hidden="true">↗</span></a></div></div></details>
+        <details class="project"><summary><span class="project-number mono">010</span><div class="project-title"><h3>Projetos IAPE</h3><span class="mono">VIDA ESCOLAR & ACOMPANHAMENTO</span></div><span class="project-tag green">Conexão com a escola</span><span class="project-toggle" aria-hidden="true">+</span></summary><div class="project-content text-only"><div class="project-art green" aria-hidden="true"><span class="mono">pessoas + projetos</span><strong>[ juntos<span>_</span> ]</strong><span class="mono">CONECTAR PARA ACOMPANHAR.</span></div><div class="project-description"><span class="mono small-label">TECNOLOGIA NO DIA A DIA ESCOLAR.</span><p>Uma plataforma para organizar projetos e acompanhar a participação dos estudantes. Aproxima a informação de quem cuida da rotina escolar.</p><a class="text-link" href="https://projeto.iape.tech" target="_blank" rel="noopener noreferrer">Conhecer os Projetos IAPE <span aria-hidden="true">↗</span></a></div></div></details>
+        <details class="project"><summary><span class="project-number mono">011</span><div class="project-title"><h3>Speaking Arena</h3><span class="mono">IDIOMAS & EXPERIÊNCIAS</span></div><span class="project-tag purple">Aprender participando</span><span class="project-toggle" aria-hidden="true">+</span></summary><div class="project-content text-only"><div class="project-art purple" aria-hidden="true"><span class="mono">hello / olá / let's go</span><strong>Let's talk<span>↗</span></strong><span class="mono">UMA NOVA VOZ. NOVAS POSSIBILIDADES.</span></div><div class="project-description"><span class="mono small-label">O INGLÊS ENTRA EM CENA.</span><p>Atividades de inglês que combinam escuta, fala, leitura e escrita. Uma arena para praticar em grupos e desenvolver novas habilidades com acompanhamento do professor.</p><a class="text-link" href="https://arena.iape.tech" target="_blank" rel="noopener noreferrer">Explorar a Speaking Arena <span aria-hidden="true">↗</span></a></div></div></details>
+        <details class="project"><summary><span class="project-number mono">100</span><div class="project-title"><h3>IAPE Notify</h3><span class="mono">COMUNICAÇÃO & CONEXÕES</span></div><span class="project-tag yellow">A informação chega</span><span class="project-toggle" aria-hidden="true">+</span></summary><div class="project-content text-only"><div class="project-art yellow" aria-hidden="true"><span class="mono">mensagem recebida.</span><strong>Você +<br>conectado.</strong><span class="mono">INFORMAÇÃO EM MOVIMENTO.</span></div><div class="project-description"><span class="mono small-label">A ESCOLA MAIS PERTO.</span><p>Comunicação com estudantes por notificações e WhatsApp. Uma ferramenta do ecossistema para aproximar avisos e informações da comunidade escolar.</p><a class="text-link" href="https://notify.iape.tech" target="_blank" rel="noopener noreferrer">Acessar o IAPE Notify <span aria-hidden="true">↗</span></a></div></div></details>
+      </div><p class="projects-footnote mono">FERRAMENTAS DO ECOSSISTEMA IAPE. UMA BASE PARA CONHECER, ESTUDAR E EVOLUIR.</p></div></section>
+    <section id="equipe" class="team wrap section-space" aria-labelledby="team-title"><div class="section-label mono"><span>10 / A EQUIPE</span><span>PRIMEIRA VERSÃO. MUITAS POSSIBILIDADES.</span></div><div class="section-intro"><h2 id="team-title">Por trás do código,<br><span class="highlight lilac">gente.</span></h2><p>Talentos diferentes, a mesma vontade<br>de construir algo que importa.<br>Prazer, somos a CS_0.</p></div><div class="demo-note"><span class="mono">[ EM CONSTRUÇÃO ]</span><p>Por enquanto, este é um elenco de demonstração: nomes, retratos e histórias são fictícios. Em breve, os alunos da CS_0 ocupam estes lugares.</p></div>
+      <div class="team-grid">
+        <article class="member"><button class="member-portrait yellow" data-portrait="0" data-effect="teleport" aria-label="Materializar retrato ilustrativo de Lia"><canvas aria-hidden="true"></canvas><span class="portrait-top mono">000 / CS_0</span><span class="portrait-bottom mono">MATERIALIZAR <span>↗</span></span></button><div class="member-heading"><h3>Lia</h3><span class="mono">&lt;design /&gt;</span></div><p>Enxerga possibilidades em uma tela em branco. Gosta de transformar ideias confusas em experiências simples.</p><span class="member-tag mono">CURIOSIDADE COMO PONTO DE PARTIDA.</span></article>
+        <article class="member"><button class="member-portrait green" data-portrait="1" data-effect="dust" aria-label="Desintegrar retrato ilustrativo de Caio"><canvas aria-hidden="true"></canvas><span class="portrait-top mono">001 / CS_0</span><span class="portrait-bottom mono">DESINTEGRAR <span>↗</span></span></button><div class="member-heading"><h3>Caio</h3><span class="mono">&lt;dev /&gt;</span></div><p>Quer descobrir o que acontece por trás de cada clique. Resolve um problema e já está imaginando o próximo.</p><span class="member-tag mono">UM COMMIT DE CADA VEZ.</span></article>
+        <article class="member"><button class="member-portrait purple" data-portrait="2" data-effect="glitch" aria-label="Aplicar glitch ao retrato ilustrativo de Nina"><canvas aria-hidden="true"></canvas><span class="portrait-top mono">010 / CS_0</span><span class="portrait-bottom mono">OUTRA DIMENSÃO <span>↗</span></span></button><div class="member-heading"><h3>Nina</h3><span class="mono">&lt;criatividade /&gt;</span></div><p>Conecta ideias que pareciam distantes. Entre um esboço e um experimento, encontra um jeito novo de fazer.</p><span class="member-tag mono">E SE A GENTE TENTASSE ASSIM?</span></article>
+        <article class="member"><button class="member-portrait yellow" data-portrait="3" data-effect="dust" aria-label="Desintegrar retrato ilustrativo de Theo"><canvas aria-hidden="true"></canvas><span class="portrait-top mono">011 / CS_0</span><span class="portrait-bottom mono">DESINTEGRAR <span>↗</span></span></button><div class="member-heading"><h3>Theo</h3><span class="mono">&lt;experimentos /&gt;</span></div><p>Aprende desmontando, testando e montando outra vez. Acredita que as melhores descobertas começam com uma pergunta.</p><span class="member-tag mono">TESTAR TAMBÉM É APRENDER.</span></article>
+      </div><p class="interaction-note mono"><span aria-hidden="true">↗</span> PASSE O MOUSE OU TOQUE NOS RETRATOS. CADA UM TEM SEU PRÓPRIO UNIVERSO.</p>
+    </section>
+    <section id="manifesto" class="manifesto section-space" aria-labelledby="manifesto-title"><div class="wrap"><div class="section-label mono"><span>11 / NO QUE ACREDITAMOS</span><span>MAIS QUE UMA LINHA DE CÓDIGO.</span></div><div class="manifesto-layout"><div><span class="manifesto-glyph" aria-hidden="true">✳</span><span class="mono">NOSSO MANIFESTO / V.0</span></div><div><h2 id="manifesto-title">Ninguém começa<br>sabendo.<br><span>A gente começa<br>fazendo.</span></h2><p>A Code Staff é um espaço para experimentar tecnologia de verdade. Perguntar, errar, entender e tentar de novo. Em equipe.</p><p>A cada semestre, chegam novas pessoas e novas ideias. O conhecimento fica, os projetos evoluem e o próximo grupo começa de onde a gente chegou.</p><p class="manifesto-last">O código é só o começo.<br>O que a gente constrói junto vai além.</p></div></div><div class="manifesto-values mono"><span><b>01</b> CURIOSIDADE ANTES DE CERTEZA</span><span><b>10</b> CONSTRUIR PARA APRENDER</span><span><b>11</b> COMPARTILHAR PARA EVOLUIR</span></div></div></section>
+    <section id="geracoes" class="generations wrap section-space" aria-labelledby="generations-title"><div class="section-label mono"><span>100 / GERAÇÕES</span><span>A HISTÓRIA ESTÁ SÓ COMEÇANDO.</span></div><div class="section-intro"><h2 id="generations-title">A equipe muda.<br>O movimento continua<span class="green-text">.</span></h2><p>Um novo semestre, uma nova formação.<br>Nossa contagem é binária.<br>Nosso potencial não tem limite.</p></div><div class="generation-track"><div class="generation current"><span class="mono">AGORA</span><strong>CS_0</strong><span class="mono"><span class="status-dot"></span> PRIMEIRA GERAÇÃO</span></div><div class="generation"><span class="mono">PRÓXIMO SEMESTRE</span><strong>CS_01</strong><span class="mono">AINDA POR ESCREVER</span></div><div class="generation"><span class="mono">DEPOIS</span><strong>CS_10</strong><span class="mono">NOVAS POSSIBILIDADES</span></div><div class="generation"><span class="mono">E DEPOIS…</span><strong>CS_11</strong><span class="mono">A HISTÓRIA CONTINUA</span></div></div><div class="generation-outro"><span class="mono">CS_100 → CS_101 → CS_110 → …</span><p>O próximo capítulo pode ter o seu nome.</p><a class="text-link" href="#equipe">Tudo começa com gente <span aria-hidden="true">↑</span></a></div></section>
+    <section class="closing wrap" aria-label="Mensagem final"><span class="mono">// TODO: CONSTRUIR O QUE VEM A SEGUIR.</span><p>Vamos fazer<br><span class="highlight">acontecer<span aria-hidden="true">↗</span></span></p><a href="#inicio" class="back-top" aria-label="Voltar ao início">↑</a></section>
+  </main>
+  <footer class="site-footer wrap"><a class="brand footer-brand" href="#inicio"><span class="brand-symbol" aria-hidden="true">[_]</span><span>code staff<span class="brand-sub">FEITO DE GENTE. MOVIDO A IDEIAS.</span></span></a><span class="mono">IAPE.TECH / CS_0</span><button id="motion-toggle" class="motion-toggle mono" aria-pressed="false">EFEITOS <span>ATIVOS</span><i aria-hidden="true">◉</i></button><a href="https://github.com/iapeTEC" class="mono footer-github" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></footer>
 </body>
 </html>
